@@ -1,4 +1,4 @@
-import Account
+import bin.Account as Account
 import os
 from configparser import ConfigParser
 
@@ -30,15 +30,10 @@ Welcome, {data[2]}
         elif usr_in == 5:
             Account.tsn_history()
         elif usr_in == 9:
-            from login import menu
+            from .login import menu
             clear()
-            config = ConfigParser()
-            with open('config.ini','r+') as f:
-                config.readfp(f)
-                config.remove_section('AC_DETAILS')
-                f.seek(0)
-                config.write(f)
-                f.truncate()
+            from .Account import clear_config_cache
+            clear_config_cache()
             menu()
         else:
             print("Invalid Option, Please Choose From the List")

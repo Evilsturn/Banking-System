@@ -1,6 +1,6 @@
-from Authenticate import user_login,register_user
-from user import NewUser
-from main_menu import main_menu
+from .Authenticate import user_login,register_user
+from .user import NewUser
+from .main_menu import main_menu
 from configparser import ConfigParser
 import os
 

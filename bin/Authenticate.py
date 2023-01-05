@@ -1,4 +1,4 @@
-from connection import do_connection
+from .connection import do_connection
 
 connec = do_connection()
 cursor = connec.cursor()

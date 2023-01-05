@@ -60,8 +60,8 @@ if __name__ == "__main__":
             config.write(f)
 
         # Checks for MySQL connection & creates a Database
-        from .bin.connection import do_connection
-        from .bin.login import menu
+        from bin.connection import do_connection
+        from bin.login import menu
         connec = do_connection()
         cursor = connec.cursor()
         if connec.is_connected():

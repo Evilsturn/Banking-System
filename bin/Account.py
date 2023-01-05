@@ -1,5 +1,5 @@
 from configparser import ConfigParser
-from connection import do_connection
+from .connection import do_connection
 from datetime import datetime
 import os
 
@@ -7,6 +7,18 @@ import os
 connec = do_connection()
 cursor = connec.cursor()
 clear = lambda:os.system('cls' if os.name=='nt' else 'clear')
+
+
+# Utility Functions
+
+def clear_config_cache():
+    config = ConfigParser()
+    with open('config.ini','r+') as f:
+        config.readfp(f)
+        config.remove_section('AC_DETAILS')
+        f.seek(0)
+        config.write(f)
+        f.truncate()
 
 def fetch_user_data():
     config = ConfigParser()
@@ -22,6 +34,11 @@ def get_balance(ac_no):
     data = cursor.fetchone()
     return data[0]
 
+def gen_tsn_id():
+    import uuid
+    return str(uuid.uuid4())
+
+# Shows Account Details
 def print_details():
     clear()
     print("------------------")
@@ -42,16 +59,18 @@ def print_details():
     while True:
         usr_in = int(input("> "))
         if usr_in == 0:
-            from main_menu import main_menu
+            from .main_menu import main_menu
             clear()
             main_menu()
             break
 
         elif usr_in == 1:
+            clear_config_cache()
             exit(0)
         else:
             print("Invalid Option")
 
+# Deposit Gateway
 def deposit():
     clear()
     data = fetch_user_data()
@@ -71,17 +90,18 @@ def deposit():
     while True:
         usr_in = int(input("> "))
         if usr_in == 0:
-            from main_menu import main_menu
+            from .main_menu import main_menu
             clear()
             main_menu()
             break
 
         elif usr_in == 1:
+            clear_config_cache()
             exit(0)
         else:
             print("Invalid Option")
 
-
+# Withdrawl Gateway
 def withdraw():
     clear()
     data = fetch_user_data()
@@ -105,16 +125,18 @@ def withdraw():
     while True:
         usr_in = int(input("> "))
         if usr_in == 0:
-            from main_menu import main_menu
+            from .main_menu import main_menu
             clear()
             main_menu()
             break
 
         elif usr_in == 1:
+            clear_config_cache()
             exit(0)
         else:
             print("Invalid Option")
 
+# Transfer Gateway
 def transfer():
     clear()
     data = fetch_user_data()
@@ -147,16 +169,18 @@ def transfer():
     while True:
         usr_in = int(input("> "))
         if usr_in == 0:
-            from main_menu import main_menu
+            from .main_menu import main_menu
             clear()
             main_menu()
             break
 
         elif usr_in == 1:
+            clear_config_cache()
             exit(0)
         else:
             print("Invalid Option")
     
+# Shows the Transaction History
 def tsn_history():
     data = fetch_user_data()
     cursor.execute(f"SELECT * FROM TRANSACTIONS WHERE Account_No={data[0][6]} ORDER BY Date_Time DESC")
@@ -174,16 +198,14 @@ def tsn_history():
     while True:
         usr_in = int(input("> "))
         if usr_in == 0:
-            from main_menu import main_menu
+            from .main_menu import main_menu
             clear()
             main_menu()
             break
 
         elif usr_in == 1:
+            clear_config_cache()
             exit(0)
         else:
             print("Invalid Option")
 
-def gen_tsn_id():
-    import uuid
-    return str(uuid.uuid4())
