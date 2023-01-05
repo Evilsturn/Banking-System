@@ -31,6 +31,7 @@ $$ |   $$ | $$$$$$\  $$\   $$\  $$$$$$\   $$$$$$\   $$$$$$\   $$$$$$\        $$ 
             usr_in = int(input("> "))
             if usr_in == 1:
                 clear()
+                print("Login with Banking Credentials: ")
                 usr_name = input("Username: ")
                 psswd = input("Password: ")
                 if user_login(usr_name,psswd):
