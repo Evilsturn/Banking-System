@@ -10,7 +10,7 @@ clear = lambda:os.system('cls' if os.name=='nt' else 'clear')
 
 def fetch_user_data():
     config = ConfigParser()
-    config.read('ac.ini')
+    config.read('config.ini')
     cfg = config['AC_DETAILS']
     cursor.execute(f"SELECT * FROM USERS WHERE User_Name = '{cfg['u_n']}'")
     data = cursor.fetchall()

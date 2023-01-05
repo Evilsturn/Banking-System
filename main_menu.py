@@ -1,5 +1,6 @@
 import Account
 import os
+from configparser import ConfigParser
 
 def main_menu():
     clear = lambda:os.system('cls' if os.name=='nt' else 'clear')
@@ -31,6 +32,13 @@ Welcome, {data[2]}
         elif usr_in == 9:
             from login import menu
             clear()
+            config = ConfigParser()
+            with open('config.ini','r+') as f:
+                config.readfp(f)
+                config.remove_section('AC_DETAILS')
+                f.seek(0)
+                config.write(f)
+                f.truncate()
             menu()
         else:
             print("Invalid Option, Please Choose From the List")

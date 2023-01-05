@@ -36,7 +36,7 @@ $$ |   $$ | $$$$$$\  $$\   $$\  $$$$$$\   $$$$$$\   $$$$$$\   $$$$$$\        $$ 
                 if user_login(usr_name,psswd):
                     config = ConfigParser()
                     config["AC_DETAILS"]= {"u_n": usr_name}
-                    with open('ac.ini',"w") as f:
+                    with open('config.ini',"a") as f:
                         config.write(f)
                     main_menu()
             elif usr_in == 2:
