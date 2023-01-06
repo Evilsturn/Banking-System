@@ -1,6 +1,8 @@
+import mysql.connector
 # Creates all the Tables if it does not exists
 def inital_setup(cursor):
     cursor.execute("CREATE DATABASE IF NOT EXISTS BANK;")
+    cursor.execute("USE BANK;")
     cursor.execute(
         """CREATE TABLE IF NOT EXISTS USERS(
             User_Name varchar(20),
@@ -60,9 +62,8 @@ if __name__ == "__main__":
             config.write(f)
 
         # Checks for MySQL connection & creates a Database
-        from bin.connection import do_connection
         from bin.login import menu
-        connec = do_connection()
+        connec = mysql.connector.connect(host="127.0.0.1",user=usr_name,password=psswd)
         cursor = connec.cursor()
         if connec.is_connected():
             print('Connection Established')
